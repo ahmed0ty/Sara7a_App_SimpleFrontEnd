@@ -1,0 +1,167 @@
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+.page{
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+background:#f2f2f2;
+font-family:Arial;
+}
+
+.card{
+width:380px;
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.profile{
+text-align:center;
+margin-bottom:15px;
+}
+
+.profile img{
+width:80px;
+border-radius:50%;
+}
+
+.profile h2{
+margin:5px 0;
+}
+
+textarea{
+width:100%;
+height:120px;
+padding:10px;
+border-radius:8px;
+border:1px solid #ddd;
+resize:none;
+font-size:14px;
+}
+
+.counter{
+margin-top:5px;
+font-size:13px;
+color:#777;
+}
+
+.anonymous{
+margin-top:10px;
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.emojiBox{
+margin-top:10px;
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+font-size:22px;
+cursor:pointer;
+}
+
+.sendBtn{
+margin-top:15px;
+width:100%;
+padding:12px;
+background:#333;
+color:white;
+border:none;
+border-radius:8px;
+font-size:16px;
+cursor:pointer;
+}
+
+.sendBtn:hover{
+background:#000;
+}
+
+/* ===== Loading Spinner ===== */
+
+.spinner{
+width:22px;
+height:22px;
+border:3px solid white;
+border-top:3px solid transparent;
+border-radius:50%;
+animation:spin .8s linear infinite;
+margin:auto;
+}
+
+@keyframes spin{
+to{
+transform:rotate(360deg);
+}
+}
+
+/* ===== Success Page ===== */
+
+.successPage{
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+background:#f2f2f2;
+font-family:Arial;
+}
+
+.successCard{
+width:350px;
+background:white;
+padding:35px;
+border-radius:14px;
+text-align:center;
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+.checkmark{
+font-size:65px;
+color:#4CAF50;
+margin-bottom:10px;
+animation:pop .4s ease;
+}
+
+@keyframes pop{
+
+0%{
+transform:scale(0);
+}
+
+70%{
+transform:scale(1.2);
+}
+
+100%{
+transform:scale(1);
+}
+
+}
+
+.successCard h2{
+margin-bottom:8px;
+}
+
+.successCard p{
+color:#666;
+margin-bottom:20px;
+}
+
+.successCard button{
+background:#333;
+color:white;
+border:none;
+padding:10px 20px;
+border-radius:8px;
+cursor:pointer;
+font-size:15px;
+}
+
+.successCard button:hover{
+background:black;
+}
