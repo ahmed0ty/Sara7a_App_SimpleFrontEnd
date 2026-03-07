@@ -56,7 +56,7 @@ return(
 
 }
 
-const link=`http://localhost:5173/send/${user._id}`
+const link=`${window.location.origin}/send/${user._id}`
 
 const copyLink=()=>{
 navigator.clipboard.writeText(link)
