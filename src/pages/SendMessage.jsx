@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./sendMessage.css";
@@ -12,12 +12,59 @@ const [message,setMessage] = useState("");
 const [anonymous,setAnonymous] = useState(true);
 const [loading,setLoading] = useState(false);
 const [success,setSuccess] = useState(false);
+const [user,setUser] = useState(null);
 
 const emojis = ["😢","😭","😘","😍","🙂","🤣","😂","😁","😜","🙈","💋","👋","😷","😡","💩","😲","😎","❤️","🌹"];
+
+
+useEffect(()=>{
+
+const getUser = async ()=>{
+
+try{
+
+const res = await axios.get(
+`https://sara7a-application.onrender.com/api/user/public/${id}`
+);
+
+setUser(res.data.user);
+
+}catch(err){
+console.log(err);
+}
+
+};
+
+getUser();
+
+},[id]);
+
+
+const formatLastSeen = (date)=>{
+
+const diff = Date.now() - new Date(date).getTime();
+
+const minutes = Math.floor(diff / 60000);
+
+if(minutes < 1) return "الآن";
+
+if(minutes < 60) return `منذ ${minutes} دقيقة`;
+
+const hours = Math.floor(minutes / 60);
+
+if(hours < 24) return `منذ ${hours} ساعة`;
+
+const days = Math.floor(hours / 24);
+
+return `منذ ${days} يوم`;
+
+};
+
 
 const addEmoji = (emoji)=>{
 setMessage(prev => prev + emoji);
 };
+
 
 const handleSend = async ()=>{
 
@@ -51,6 +98,7 @@ setLoading(false);
 
 };
 
+
 if(success){
 
 return(
@@ -77,6 +125,7 @@ return(
 
 }
 
+
 return(
 
 <div className="page">
@@ -84,10 +133,19 @@ return(
 <div className="card">
 
 <div className="profile">
+
 <img src={sara7aImg} alt="profile"/>
-<h2>Ahmed Abdelbaky</h2>
-<p>آخر ظهور : الآن</p>
+
+<h2>
+{user ? `${user.firstName} ${user.lastName}` : "Loading..."}
+</h2>
+
+<p>
+آخر ظهور : {user?.lastSeen ? formatLastSeen(user.lastSeen) : "غير متاح"}
+</p>
+
 </div>
+
 
 <textarea
 placeholder="هل لديك شيء تريد قوله بدون أن يعرفك؟"
@@ -100,6 +158,7 @@ onChange={(e)=>setMessage(e.target.value)}
 {500 - message.length} الحروف المتبقية
 </div>
 
+
 <div className="anonymous">
 <span>بشكل سري :</span>
 <input
@@ -108,6 +167,7 @@ checked={anonymous}
 onChange={()=>setAnonymous(!anonymous)}
 />
 </div>
+
 
 <div className="emojiBox">
 
@@ -120,6 +180,7 @@ onChange={()=>setAnonymous(!anonymous)}
 ))}
 
 </div>
+
 
 <button
 className="sendBtn"
